@@ -16,8 +16,8 @@ const Footer = () => {
               <p className="text-gray-400">Bringing joy and innovation</p>
             </div>
           </div>
-          {/* Navigation Links (Centered) */}
-          <div className="flex justify-center mb-6 md:mb-0">
+          {/* Navigation Links (Centered) - visible only on desktop */}
+          <div className="hidden md:flex justify-center mb-6 md:mb-0">
             <div className="flex flex-wrap gap-6 justify-center">
               <a href="#/" className="hover:text-primary transition-colors">
                 Home
@@ -34,7 +34,7 @@ const Footer = () => {
               <a href="#/videos" className="hover:text-primary transition-colors">
                 Episodes
               </a>
-              <a href="#/episodes" className="hover:text-primary transition-colors">
+              <a href="#/videos" className="hover:text-primary transition-colors">
                 About Us
               </a>
             </div>

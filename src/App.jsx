@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Episodes from "./Pages/Episodes/Episodes";
+import Studio from "./Pages/Studio/Studio";
 import Footer from "./components/Footer/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -18,13 +19,14 @@ const App = () => {
 
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
+      <div className="">
         <Navbar />
-        <main className="flex-grow">
+        <main className="">
           <Routes>
             <Route path="/" element={<Hero />} />
-            <Route path="/episodes" element={<Episodes />} />
-            {/* Additional routes */}
+            <Route path="/shows" element={<Episodes />} />
+            <Route path="/studio" element={<Studio />} />
+            {/* Add additional routes as needed */}
           </Routes>
         </main>
         <Footer />
