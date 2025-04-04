@@ -4,14 +4,18 @@ import "@splidejs/splide/dist/css/splide.min.css";
 
 function News() {
   // Use your provided dummy image URL for all images
-  const dummyImage = "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2023/10/breaking-news-template-5-1697245577.jpg";
+  const dummyImage =
+    "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2023/10/breaking-news-template-5-1697245577.jpg";
 
   useEffect(() => {
-    // Initialize Splide for the slider news section
+    // Initialize Splide for the slider news section with autoplay options
     const splide = new Splide("#post-carousel", {
       rewind: true,
       perPage: 3,
-      gap: 32,
+      gap: 32, // increased gap for symmetry
+      autoplay: true,
+      interval: 6000, // 6 seconds interval
+      pauseOnHover: true, // optional: pause when hovering
     });
     splide.mount();
   }, []);
@@ -27,7 +31,7 @@ function News() {
               <div className="relative hover-img max-h-98 overflow-hidden">
                 <a href="#">
                   <img
-                    className="max-w-full w-full mx-auto h-auto"
+                    className="max-w-full w-full mx-auto h-auto object-cover"
                     src={dummyImage}
                     alt="Cover"
                   />
@@ -54,14 +58,11 @@ function News() {
             <div className="flex-shrink max-w-full w-full lg:w-1/2">
               <div className="box-one flex flex-row flex-wrap">
                 {["Image 2", "Image 3", "Image 4", "Image 5"].map((text, idx) => (
-                  <article
-                    key={idx}
-                    className="flex-shrink max-w-full w-full sm:w-1/2"
-                  >
+                  <article key={idx} className="flex-shrink max-w-full w-full sm:w-1/2">
                     <div className="relative hover-img max-h-48 overflow-hidden">
                       <a href="#">
                         <img
-                          className="max-w-full w-full mx-auto h-auto"
+                          className="max-w-full w-full mx-auto h-auto object-cover"
                           src={dummyImage}
                           alt={`Dummy ${text}`}
                         />
@@ -104,12 +105,12 @@ function News() {
                 {["News 1", "News 2", "News 3", "News 4"].map((news, idx) => (
                   <div
                     key={idx}
-                    className="flex-shrink max-w-full w-full sm:w-1/3 lg:w-1/4 px-3 pb-3 pt-3 sm:pt-0 border-b-2 sm:border-b-0 border-dotted border-gray-100"
+                    className="flex-shrink max-w-full w-full sm:w-1/3 lg:w-1/4 px-3 pb-3 pt-3 sm:pt-0 border-b-2 border-dotted border-gray-100"
                   >
                     <div className="flex flex-row sm:block hover-img">
                       <a href="#">
                         <img
-                          className="max-w-full w-full mx-auto"
+                          className="max-w-full w-full mx-auto object-cover"
                           src={dummyImage}
                           alt={`News ${idx + 1}`}
                         />
@@ -273,7 +274,9 @@ function News() {
               </div>
               <div className="text-sm py-6 sticky top-8">
                 <div className="text-center">
-                  <a className="uppercase text-base" href="#">Advertisement</a>
+                  <a className="uppercase text-base" href="#">
+                    Advertisement
+                  </a>
                   <a href="#">
                     <img className="mx-auto mt-4" src={dummyImage} alt="advertisement area" />
                   </a>
