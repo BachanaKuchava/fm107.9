@@ -7,7 +7,7 @@ const MenuLinks = [
   { name: "Radio LIVE", link: "/radio" },
   { name: "Shows", link: "/shows" },
   { name: "Studio", link: "/studio" },
-  { name: "News/Events", link: "/news-events" },
+  { name: "News/Events", link: "/news" },
 ];
 
 const LanguageToggle = () => {
@@ -130,7 +130,7 @@ const Navbar = () => {
               <FaTimes className="text-2xl text-primary" />
             </button>
           </div>
-          {/* Category Links with extra About Us link (mobile only) */}
+          {/* Mobile Navigation Links */}
           <ul className="flex flex-col items-center gap-6 mt-8">
             {MenuLinks.map((data, index) => (
               <li key={index} onClick={() => setIsOpen(false)}>
@@ -152,7 +152,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          {/* Search and Language Section inside Mobile Menu */}
+          {/* Mobile Search and Language Section */}
           <div className="mt-10 flex flex-col items-center gap-4">
             <div className="relative w-full max-w-xs">
               <input

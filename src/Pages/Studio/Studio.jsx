@@ -99,7 +99,7 @@ function Studio() {
       </div>
 
       {/* Contact Form Section */}
-      <div className="bg-gradient-to-r from-primary to-secondary py-16">
+      <div className="bg-gradient-to-r from-primary to-primary py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
             Interested in Our Services?
