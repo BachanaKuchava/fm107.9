@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import { FaStar, FaYoutube } from "react-icons/fa";
 import HeroImg from "../../assets/dora-hero.png";
 import HeroImg2 from "../../assets/dora.png";
+import Fm from "../../assets/fm107.png";
+import podcast1 from '../../assets/podcast1.png';
+import podcast2 from '../../assets/podcastFM.png';
 import HeroBottom from "./HeroBottom";
 import { IoClose } from "react-icons/io5";
+import logo from '../../assets/logo.png';
 
 const Hero = () => {
   const [isPlay, setIsPlay] = useState(false);
+  const [fade, setFade] = useState(true);
+  const [currentReview, setCurrentReview] = useState(0);
+
   const handlePlay = () => {
     setIsPlay(!isPlay);
   };
@@ -14,12 +21,12 @@ const Hero = () => {
   // Define three different review blocks
   const reviews = [
     {
-      image: HeroImg2,
+      image: podcast2,
       rating: "4.7",
       text: "Bandai Figuartszero Doraemont",
     },
     {
-      image: HeroImg2,
+      image: podcast1,
       rating: "4.8",
       text: "Amazing collectible Doraemon",
     },
@@ -30,23 +37,31 @@ const Hero = () => {
     },
   ];
 
-  const [currentReview, setCurrentReview] = useState(0);
+  // Function to handle review change with fade transition
+  const changeReview = (updateFn) => {
+    setFade(false);
+    setTimeout(() => {
+      setCurrentReview((prev) => updateFn(prev));
+      setFade(true);
+    }, 300); // Adjust this duration for a smoother effect if needed
+  };
 
   const nextReview = () => {
-    setCurrentReview((prev) => (prev + 1) % reviews.length);
+    changeReview((prev) => (prev + 1) % reviews.length);
   };
 
   const prevReview = () => {
-    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+    changeReview((prev) => (prev - 1 + reviews.length) % reviews.length);
   };
 
-  // Auto change review every 5 seconds
+  // Auto change review every 5 seconds with fade transition
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentReview((prev) => (prev + 1) % reviews.length);
+      nextReview();
     }, 5000);
     return () => clearInterval(interval);
-  }, [reviews.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -86,13 +101,18 @@ const Hero = () => {
             </div>
 
             {/* Image section */}
-            <div data-aos="zoom-in" className="relative flex items-center justify-center">
+            <div
+              data-aos="zoom-in"
+              className="relative flex items-center justify-center overflow-visible"
+            >
+              {/* Shadow element with z-index 0 */}
+              <div className="absolute z-0 bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[80%] h-8 rounded-full bg-black/50 blur-3xl" />
+              {/* FM Image with z-index 10 */}
               <img
-                src={HeroImg}
+                src={logo}
                 alt="Hero"
-                className="w-[180px] sm:w-[240px] lg:w-[340px] mx-auto relative z-50"
+                className="w-[300px] sm:w-[420px] lg:w-[520px] xl:w-[600px] max-w-full mx-auto relative z-10"
               />
-              <div className="absolute z-0 bottom-0 left-0 w-[260px] mx-auto h-[20px] blur-2xl bg-black"></div>
             </div>
 
             {/* Review Slider Section */}
@@ -100,8 +120,12 @@ const Hero = () => {
               data-aos="slide-left"
               className="sm:pl-16 md:pl-24 flex justify-center sm:justify-end items-center"
             >
-              {/* Fixed-size container for consistent review size */}
-              <div className="w-[240px] h-[200px] flex flex-col justify-center">
+              {/* Fixed-size container with fade transition */}
+              <div
+                className={`w-[240px] h-[200px] flex flex-col justify-center transition-opacity duration-300 ${
+                  fade ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <img
                   src={reviews[currentReview].image}
                   alt="Review"

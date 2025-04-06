@@ -24,7 +24,7 @@ function Studio() {
   return (
     <div className="studio-page">
       {/* Slider Section */}
-      <div className="relative w-full h-80 overflow-hidden">
+      <div data-aos="fade" className="relative w-full h-80 overflow-hidden">
         {sliderImages.map((src, index) => (
           <img
             key={index}
@@ -43,7 +43,7 @@ function Studio() {
       </div>
 
       {/* Services Section */}
-      <div className="container mx-auto px-4 py-16">
+      <div data-aos="fade-up" className="container mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold text-primary text-center mb-6">
           Our Studio Services
         </h1>
@@ -54,7 +54,10 @@ function Studio() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Service 1: Voice Over */}
-          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-all duration-300">
+          <div
+            data-aos="zoom-in"
+            className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-all duration-300"
+          >
             <FaMicrophone className="text-primary text-6xl mb-4" />
             <h2 className="text-2xl font-bold text-primary mb-2">Voice Over</h2>
             <p className="text-gray-600 text-center">
@@ -63,7 +66,10 @@ function Studio() {
             </p>
           </div>
           {/* Service 2: Sound Engineering */}
-          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-all duration-300">
+          <div
+            data-aos="zoom-in"
+            className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-all duration-300"
+          >
             <MdGraphicEq className="text-primary text-6xl mb-4" />
             <h2 className="text-2xl font-bold text-primary mb-2">
               Sound Engineering
@@ -74,7 +80,10 @@ function Studio() {
             </p>
           </div>
           {/* Service 3: Music Production */}
-          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-all duration-300">
+          <div
+            data-aos="zoom-in"
+            className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-all duration-300"
+          >
             <FaMusic className="text-primary text-6xl mb-4" />
             <h2 className="text-2xl font-bold text-primary mb-2">
               Music Production
@@ -85,7 +94,10 @@ function Studio() {
             </p>
           </div>
           {/* Service 4: Commercial Recording */}
-          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-all duration-300">
+          <div
+            data-aos="zoom-in"
+            className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform hover:scale-105 transition-all duration-300"
+          >
             <FaHeadphones className="text-primary text-6xl mb-4" />
             <h2 className="text-2xl font-bold text-primary mb-2">
               Commercial Recording
@@ -99,7 +111,7 @@ function Studio() {
       </div>
 
       {/* Contact Form Section */}
-      <div className="bg-gradient-to-r from-primary to-primary py-16">
+      <div data-aos="fade-up" className="bg-gradient-to-r from-primary to-primary py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-4">
             Interested in Our Services?

@@ -1,10 +1,11 @@
+// Navbar.jsx
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { GiAtomicSlashes } from "react-icons/gi";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import Fm from "../../assets/fm107.png";
 
 const MenuLinks = [
-  { name: "Radio LIVE", link: "/radio" },
+  { name: "Radio LIVE", link: "/RadioLive" },
   { name: "Shows", link: "/shows" },
   { name: "Studio", link: "/studio" },
   { name: "News/Events", link: "/news" },
@@ -40,15 +41,11 @@ const Navbar = () => {
   return (
     <nav>
       <div data-aos="fade-down" className="container py-4">
-        {/* Desktop Layout */}
-        <div className="hidden md:flex items-center justify-between">
+        {/* Desktop Layout (for screens >= 1280px) */}
+        <div className="hidden xl:flex items-center justify-between">
           {/* Left: Logo */}
           <Link to="/" className="flex items-center gap-4">
-            <GiAtomicSlashes className="text-6xl text-primary" />
-            <div className="flex flex-col text-2xl font-bold text-gray-600 leading-5">
-              <span>Dora</span>
-              <span>emon</span>
-            </div>
+            <img src={Fm} className="w-[120px] h-[80px]" />
           </Link>
           {/* Center: Navigation Links */}
           <ul className="flex items-center gap-6">
@@ -83,15 +80,11 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Layout */}
-        <div className="flex md:hidden items-center justify-between">
-          {/* Left: Logo */}
+        {/* Mobile Layout (for screens < 1280px) */}
+        <div className="flex xl:hidden items-center justify-between">
+          {/* Left: Logo using Fm */}
           <Link to="/" className="flex items-center gap-4">
-            <GiAtomicSlashes className="text-6xl text-primary" />
-            <div className="flex flex-col text-2xl font-bold text-gray-600 leading-5">
-              <span>Dora</span>
-              <span>emon</span>
-            </div>
+            <img src={Fm} className="w-[120px] h-[80px]" />
           </Link>
           {/* Right: Burger Menu Icon */}
           <div
@@ -105,7 +98,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`md:hidden fixed top-0 left-0 w-full h-full bg-white z-50 transform ${
+        className={`xl:hidden fixed top-0 left-0 w-full h-full bg-white z-50 transform ${
           isOpen ? "translate-y-0" : "-translate-y-full"
         } transition-transform duration-300 ease-in-out`}
       >
@@ -117,11 +110,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
               className="flex items-center gap-4"
             >
-              <GiAtomicSlashes className="text-4xl text-primary" />
-              <div className="flex flex-col text-xl font-bold text-gray-600 leading-5">
-                <span>Dora</span>
-                <span>emon</span>
-              </div>
+              <img src={Fm} className="w-[120px] h-[80px]" />
             </Link>
             <button
               onClick={toggleMenu}

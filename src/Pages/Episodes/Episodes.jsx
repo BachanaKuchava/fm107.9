@@ -56,21 +56,27 @@ const Episodes = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-10">
-      <h1 className="text-4xl font-bold text-primary mb-8 text-center">Shows</h1>
+    <div 
+      className="container mx-auto px-4 py-10" 
+      data-aos="zoom-in"
+      data-aos-duration="1000"
+    >
+      <h1 className="text-4xl font-bold text-primary mb-8 text-center">
+        Shows
+      </h1>
       
       {/* Shows Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {currentEpisodes.map((episode) => (
           <Link
             key={episode.id}
-            to={`/episodes/${episode.id}`}
+            to="/episodes" // Now navigates to EpisodesInnerPage
             className="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
           >
             {/* Card Cover with Play Button Overlay */}
             <div className="relative">
               <img
-                src='https://img.ausha.co/cb:-U1P~1ddd7/w:auto/h:auto/q:mauto/f:avif/https://www.ausha.co/wp-content/uploads/2021/11/Podcast-cover-art.jpg'
+                src="https://img.ausha.co/cb:-U1P~1ddd7/w:auto/h:auto/q:mauto/f:avif/https://www.ausha.co/wp-content/uploads/2021/11/Podcast-cover-art.jpg"
                 alt={episode.title}
                 className="w-full h-48 object-cover"
               />
