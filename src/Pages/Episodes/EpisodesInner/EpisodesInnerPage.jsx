@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaPlay } from "react-icons/fa";
 
 /**
  * Example data to mimic fetched episodes.
@@ -68,19 +69,18 @@ const episodesData = [
 function EpisodesInnerPage() {
   const navigate = useNavigate();
 
-  // Set episodes per page based on viewport:
-  // For desktop (≥640px): 3 episodes; for mobile (<640px): 4 episodes.
-  const [episodesPerPage, setEpisodesPerPage] = useState(4);
+  // Set number of episodes per page based on viewport:
+  // For mobile (<640px): 4 episodes; for desktop: 2 episodes.
+  const [episodesPerPage, setEpisodesPerPage] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 640) {
-        setEpisodesPerPage(3);
-      } else {
+      if (window.innerWidth < 640) {
         setEpisodesPerPage(4);
+      } else {
+        setEpisodesPerPage(2);
       }
-      // Reset to first page when layout changes.
       setCurrentPage(1);
     };
     handleResize(); // Run once on mount.
@@ -108,12 +108,12 @@ function EpisodesInnerPage() {
 
   return (
     <main
-      className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-gray-900 text-white p-4"
+      className="min-h-screen bg-white text-gray-900 p-4"
       data-aos="fade"
       data-aos-duration="800"
     >
       {/* Hero / Banner */}
-      <section className="relative w-full flex items-center justify-center py-16 px-4 text-center">
+      <section className="relative w-full flex items-center justify-center py-16 px-4 text-center bg-gray-50 shadow rounded-lg">
         <div
           className="absolute inset-0 bg-no-repeat bg-center bg-cover opacity-10"
           style={{
@@ -122,10 +122,10 @@ function EpisodesInnerPage() {
           }}
         ></div>
         <div className="relative z-10 max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-md">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
             Our Awesome Podcast
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 max-w-xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-700 max-w-xl mx-auto">
             Dive into captivating episodes, explore new ideas, and get inspired
             by thought-provoking discussions.
           </p>
@@ -135,8 +135,8 @@ function EpisodesInnerPage() {
       {/* Episodes List */}
       <section className="container mx-auto px-4 py-10 relative z-10">
         <header className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-pink-400">Episodes</h2>
-          <p className="text-gray-300 mt-2 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-800">Episodes</h2>
+          <p className="text-gray-600 mt-2 max-w-2xl mx-auto">
             Select an episode to listen and explore more details.
           </p>
         </header>
@@ -144,35 +144,37 @@ function EpisodesInnerPage() {
         {/* Flex container: Episodes Grid + Desktop Sidebar */}
         <div className="flex flex-col sm:flex-row gap-8">
           {/* Episodes Grid */}
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-8">
             {currentEpisodes.map((ep, idx) => (
               <React.Fragment key={ep.id}>
                 <div
                   onClick={goToSingleEpisode}
-                  className="bg-gray-800 bg-opacity-80 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-transform transform hover:scale-105 cursor-pointer"
+                  className="relative rounded overflow-hidden cursor-pointer transition-transform transform hover:scale-105"
                 >
-                  {/* Using aspect-video for a 16:9 ratio */}
-                  <div className="aspect-video w-full overflow-hidden">
-                    <img
-                      src={ep.thumbnail}
-                      alt={ep.title}
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="relative">
+                    {/* To make cards more proportional and uniform, we use an aspect ratio container */}
+                    <div className="aspect-video w-full overflow-hidden">
+                      <img
+                        src={ep.thumbnail}
+                        alt={ep.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 opacity-0 transition-opacity duration-300 hover:opacity-100">
+                      <FaPlay className="text-white text-4xl" />
+                    </div>
                   </div>
-                  <div className="p-4 flex flex-col space-y-2">
-                    <h3 className="text-xl font-semibold text-pink-300">
+                  <div className="p-4 flex flex-col space-y-3 bg-white shadow-lg">
+                    <a
+                      href="#"
+                      className="font-semibold text-lg hover:text-blue-600 transition duration-500 ease-in-out mb-2 block"
+                    >
                       {ep.title}
-                    </h3>
-                    <p className="text-sm text-gray-200 line-clamp-3">
+                    </a>
+                    <p className="text-gray-600 text-sm line-clamp-3">
                       {ep.description}
                     </p>
-                    <button
-                      className="mt-auto bg-pink-500 hover:bg-pink-600 text-white font-medium py-2 px-4 rounded transition-colors"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        goToSingleEpisode();
-                      }}
-                    >
+                    <button className="mt-auto bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors">
                       Listen Now
                     </button>
                   </div>
@@ -180,14 +182,14 @@ function EpisodesInnerPage() {
                 {/* Mobile: Insert Advertisement after the second card */}
                 {idx === 1 && (
                   <div className="block sm:hidden">
-                    <div className="bg-white bg-opacity-10 p-4 rounded-xl shadow-md flex flex-col items-center">
-                      <h3 className="text-2xl font-bold text-pink-300 mb-3">
+                    <div className="bg-white border border-gray-200 p-4 rounded-xl shadow flex flex-col items-center">
+                      <h3 className="text-2xl font-bold text-gray-800 mb-3">
                         Sponsored Ad
                       </h3>
                       <img
                         src={adImage}
                         alt="Advertisement"
-                        className="w-full max-w-sm rounded-lg shadow-md"
+                        className="w-full max-w-sm rounded-lg shadow"
                       />
                     </div>
                   </div>
@@ -198,14 +200,14 @@ function EpisodesInnerPage() {
 
           {/* Desktop Sidebar Advertisement */}
           <div className="hidden sm:block sm:w-1/3">
-            <div className="bg-white bg-opacity-10 p-4 rounded-xl shadow-md flex flex-col items-center">
-              <h3 className="text-2xl font-bold text-pink-300 mb-3">
+            <div className="bg-white border border-gray-200 p-4 rounded-xl shadow flex flex-col items-center">
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">
                 Sponsored Ad
               </h3>
               <img
                 src={adImage}
                 alt="Advertisement"
-                className="w-full rounded-lg shadow-md"
+                className="w-full rounded-lg shadow"
               />
             </div>
           </div>
@@ -213,32 +215,32 @@ function EpisodesInnerPage() {
 
         {/* For Mobile: Advertisement block before Pagination */}
         <div className="block sm:hidden mt-8">
-          <div className="bg-white bg-opacity-10 p-4 rounded-xl shadow-md flex flex-col items-center">
-            <h3 className="text-2xl font-bold text-pink-300 mb-3">
+          <div className="bg-white border border-gray-200 p-4 rounded-xl shadow flex flex-col items-center">
+            <h3 className="text-2xl font-bold text-gray-800 mb-3">
               Sponsored Ad
             </h3>
             <img
               src={adImage}
               alt="Advertisement"
-              className="w-full max-w-sm rounded-lg shadow-md"
+              className="w-full max-w-sm rounded-lg shadow"
             />
           </div>
         </div>
 
-        {/* Pagination Controls */}
+        {/* Desktop Pagination Controls (above extra desktop ad) */}
         <div className="hidden sm:flex justify-center items-center mt-8 space-x-4">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
             className={`py-2 px-4 rounded-md font-semibold transition-colors ${
               currentPage === 1
-                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                : "bg-pink-500 hover:bg-pink-600"
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600 text-white"
             }`}
           >
             Prev
           </button>
-          <span className="text-gray-300 font-medium">
+          <span className="text-gray-600 font-medium">
             Page {currentPage} of {totalPages}
           </span>
           <button
@@ -248,8 +250,8 @@ function EpisodesInnerPage() {
             disabled={currentPage === totalPages}
             className={`py-2 px-4 rounded-md font-semibold transition-colors ${
               currentPage === totalPages
-                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                : "bg-pink-500 hover:bg-pink-600"
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600 text-white"
             }`}
           >
             Next
@@ -263,24 +265,22 @@ function EpisodesInnerPage() {
             disabled={currentPage === 1}
             className={`py-2 px-4 rounded-md font-semibold transition-colors ${
               currentPage === 1
-                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                : "bg-pink-500 hover:bg-pink-600"
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600 text-white"
             }`}
           >
             Prev
           </button>
-          <span className="text-gray-300 font-medium">
+          <span className="text-gray-600 font-medium">
             Page {currentPage} of {totalPages}
           </span>
           <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
             className={`py-2 px-4 rounded-md font-semibold transition-colors ${
               currentPage === totalPages
-                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                : "bg-pink-500 hover:bg-pink-600"
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600 text-white"
             }`}
           >
             Next
@@ -289,14 +289,14 @@ function EpisodesInnerPage() {
 
         {/* Additional Desktop Advertisement below pagination */}
         <div className="hidden sm:block mt-8">
-          <div className="bg-white bg-opacity-10 p-4 rounded-xl shadow-md flex flex-col items-center">
-            <h3 className="text-2xl font-bold text-pink-300 mb-3">
+          <div className="bg-white border border-gray-200 p-4 rounded-xl shadow flex flex-col items-center">
+            <h3 className="text-2xl font-bold text-gray-800 mb-3">
               Another Sponsored Ad
             </h3>
             <img
               src={adImage}
               alt="Advertisement"
-              className="w-full max-w-xl rounded-lg shadow-md"
+              className="w-full max-w-xl rounded-lg shadow"
             />
           </div>
         </div>

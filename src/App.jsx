@@ -11,6 +11,7 @@ import Episodes from "./Pages/Episodes/Episodes";
 import Studio from "./Pages/Studio/Studio";
 import News from "./Pages/News/News";
 import Footer from "./components/Footer/Footer";
+import AboutUs from "./Pages/AboutUS/AboutUs";
 import Live from "./Pages/Radio LIVE/Live";
 import EpisodesInnerPage from "./Pages/Episodes/EpisodesInner/EpisodesInnerPage";
 import SingleEpisode from "./Pages/Episodes/EpisodesInner/SingleEpisode";
@@ -129,6 +130,7 @@ function App() {
           <Route path="/studio" element={<Studio />} />
           <Route path="/news" element={<News />} />
           <Route path="/RadioLive" element={<Live />} />
+          <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/episodes" element={<EpisodesInnerPage />} />
           <Route path="/singleEpisode" element={<SingleEpisode />} />
           {/* Add additional routes here */}

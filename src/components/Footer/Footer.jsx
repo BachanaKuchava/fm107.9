@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import { GiAtomicSlashes } from "react-icons/gi";
 
@@ -16,27 +17,28 @@ const Footer = () => {
               <p className="text-gray-400">Bringing joy and innovation</p>
             </div>
           </div>
-          {/* Navigation Links (Centered) - visible only on desktop */}
+          {/* Navigation Links (Centered) */}
           <div className="hidden md:flex justify-center mb-6 md:mb-0">
             <div className="flex flex-wrap gap-6 justify-center">
-              <a href="#/" className="hover:text-primary transition-colors">
+              <Link to="/" className="hover:text-primary transition-colors">
                 Home
-              </a>
-              <a href="#/episodes" className="hover:text-primary transition-colors">
+              </Link>
+              <Link to="/RadioLive" className="hover:text-primary transition-colors">
                 Radio Live
-              </a>
-              <a href="#/store" className="hover:text-primary transition-colors">
+              </Link>
+              <Link to="/news" className="hover:text-primary transition-colors">
                 News/Events
-              </a>
-              <a href="#/toys" className="hover:text-primary transition-colors">
+              </Link>
+              <Link to="/studio" className="hover:text-primary transition-colors">
                 Studio
-              </a>
-              <a href="#/videos" className="hover:text-primary transition-colors">
+              </Link>
+              <Link to="/episodes" className="hover:text-primary transition-colors">
                 Episodes
-              </a>
-              <a href="#/videos" className="hover:text-primary transition-colors">
+              </Link>
+              {/* About Us Link */}
+              <Link to="/AboutUs" className="hover:text-primary transition-colors">
                 About Us
-              </a>
+              </Link>
             </div>
           </div>
           {/* Social Media Icons */}
