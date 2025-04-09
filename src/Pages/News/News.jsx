@@ -1,31 +1,30 @@
 import React, { useEffect } from "react";
 import Splide from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-// Optionally import custom CSS for .line-clamp-2 if needed
-// import "./News.css";
+import { Link } from "react-router-dom";
+
+// Dummy image URL
+const dummyImage =
+  "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2023/10/breaking-news-template-5-1697245577.jpg";
+
+// Dummy description text used in the hero block
+const heroDescription =
+  "This is a wider card with supporting text below as a natural lead-in to additional content.";
+
+// Helper function to truncate text to maxLength characters
+const truncateText = (text, maxLength) => {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength) + "...";
+};
+
+// Description text used in Europe/Africa items
+const descriptionText =
+  "This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content.";
+
+// Constant release date
+const releaseDate = "06/04/2025";
 
 function News() {
-  // Dummy image URL
-  const dummyImage =
-    "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2023/10/breaking-news-template-5-1697245577.jpg";
-
-  // Dummy description text used in the hero block
-  const heroDescription =
-    "This is a wider card with supporting text below as a natural lead-in to additional content.";
-
-  // Helper function to truncate text to maxLength characters
-  const truncateText = (text, maxLength) => {
-    if (text.length <= maxLength) return text;
-    return text.slice(0, maxLength) + "...";
-  };
-
-  // Description text used in Europe/Africa items
-  const descriptionText =
-    "This is a wider card with supporting text below as a natural lead-in to additional content. This is a wider card with supporting text below as a natural lead-in to additional content.";
-
-  // Constant release date
-  const releaseDate = "06/04/2025";
-
   // Initialize sliders (American slider & Mobile slider)
   useEffect(() => {
     // "American" slider (ID: post-carousel)
@@ -66,20 +65,20 @@ function News() {
             {/* Left: Featured Cover (Big Image with text below) */}
             <div className="w-full lg:w-1/2">
               <div className="hover-img overflow-hidden">
-                <a href="#">
+                <Link to="/NewsInner">
                   <img
                     className="w-full h-96 object-cover"
                     src={dummyImage}
                     alt="Cover"
                   />
-                </a>
+                </Link>
               </div>
               <div className="px-5 py-3">
-                <a href="#">
+                <Link to="/NewsInner">
                   <h2 className="text-3xl font-bold capitalize text-gray-800 mb-2">
                     Amazon Shoppers Are Ditching Designer Belts for This Best-Selling
                   </h2>
-                </a>
+                </Link>
                 <div className="flex items-center space-x-2 text-sm text-gray-500 mb-2">
                   <svg
                     className="w-4 h-4"
@@ -110,19 +109,19 @@ function News() {
               <div className="grid grid-cols-2 gap-2">
                 {["Image 2", "Image 3", "Image 4", "Image 5"].map((text, idx) => (
                   <article key={idx} className="hover-img overflow-hidden">
-                    <a href="#">
+                    <Link to="/NewsInner">
                       <img
                         className="w-full h-36 object-cover"
                         src={dummyImage}
                         alt={`Dummy ${text}`}
                       />
-                    </a>
+                    </Link>
                     <div className="px-2 py-2">
-                      <a href="#">
+                      <Link to="/NewsInner">
                         <h2 className="text-lg font-bold capitalize text-gray-800 mb-1">
                           {text} headline goes here
                         </h2>
-                      </a>
+                      </Link>
                       <div className="flex items-center space-x-2 text-sm text-gray-500 mb-1">
                         <svg
                           className="w-4 h-4"
@@ -159,20 +158,20 @@ function News() {
                     {["Image 2", "Image 3", "Image 4", "Image 5"].map((text, idx) => (
                       <li key={idx} className="splide__slide">
                         <div className="hover-img overflow-hidden">
-                          <a href="#">
+                          <Link to="/NewsInner">
                             <img
                               className="w-full h-36 object-cover"
                               src={dummyImage}
                               alt={`Dummy ${text}`}
                             />
-                          </a>
+                          </Link>
                         </div>
                         <div className="px-2 py-2">
-                          <a href="#">
+                          <Link to="/NewsInner">
                             <h2 className="text-lg font-bold capitalize text-gray-800 mb-1">
                               {text} headline goes here
                             </h2>
-                          </a>
+                          </Link>
                           <div className="flex items-center space-x-2 text-sm text-gray-500 mb-1">
                             <svg
                               className="w-4 h-4"
@@ -228,16 +227,18 @@ function News() {
                       className="w-full sm:w-1/3 lg:w-1/4 px-3 pb-3 pt-3 sm:pt-0 border-b-2 border-dotted border-gray-100"
                     >
                       <div className="hover-img">
-                        <a href="#">
+                        <Link to="/NewsInner">
                           <img
                             className="w-full object-cover"
                             src={dummyImage}
                             alt={`News ${idx + 1}`}
                           />
-                        </a>
+                        </Link>
                         <div className="px-3 py-2">
                           <h3 className="text-lg font-bold leading-tight mb-1">
-                            <a href="#">5 Tips to Save Money Booking Your Next Hotel Room</a>
+                            <Link to="/NewsInner">
+                              5 Tips to Save Money Booking Your Next Hotel Room
+                            </Link>
                           </h3>
                           <div className="flex items-center space-x-2 text-sm text-gray-500 mb-1">
                             <svg
@@ -272,11 +273,13 @@ function News() {
                   {["News 1", "News 2", "News 3", "News 4"].map((news, idx) => (
                     <div key={idx} className="flex space-x-4 border-b pb-4">
                       <div className="w-24 h-24 flex-shrink-0">
-                        <img
-                          className="w-full h-full object-cover rounded"
-                          src={dummyImage}
-                          alt={`News ${idx + 1}`}
-                        />
+                        <Link to="/NewsInner">
+                          <img
+                            className="w-full h-full object-cover rounded"
+                            src={dummyImage}
+                            alt={`News ${idx + 1}`}
+                          />
+                        </Link>
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 text-sm text-gray-500 mb-2">
@@ -297,7 +300,9 @@ function News() {
                           <span>{releaseDate}</span>
                         </div>
                         <h3 className="text-lg font-bold line-clamp-2 mb-2">
-                          <a href="#">5 Tips to Save Money Booking Your Next Hotel Room</a>
+                          <Link to="/NewsInner">
+                            5 Tips to Save Money Booking Your Next Hotel Room
+                          </Link>
                         </h3>
                         <p className="text-sm text-gray-600 line-clamp-2">
                           {truncateText(descriptionText, 100)}
@@ -328,7 +333,6 @@ function News() {
         </div>
       </div>
 
-
       {/* SLIDER NEWS SECTION (American) */}
       <div
         className="relative bg-gray-50"
@@ -355,23 +359,23 @@ function News() {
                       <li key={idx} className="splide__slide">
                         <div className="pb-3">
                           <div className="hover-img bg-white rounded-lg overflow-hidden">
-                            <a href="#">
+                            <Link to="/NewsInner">
                               <img
                                 className="w-full object-cover"
                                 src={dummyImage}
                                 alt={`Slide ${idx + 1}`}
                               />
-                            </a>
+                            </Link>
                             <div className="py-3 px-6">
                               <h3 className="text-lg font-bold leading-tight mb-2">
-                                <a href="#">
+                                <Link to="/NewsInner">
                                   5 Tips to Save Money Booking Your Next Hotel Room
-                                </a>
+                                </Link>
                               </h3>
-                              <a className="text-gray-500" href="#">
+                              <Link className="text-gray-500" to="/NewsInner">
                                 <span className="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
                                 Europe
-                              </a>
+                              </Link>
                             </div>
                           </div>
                         </div>
@@ -384,7 +388,6 @@ function News() {
           </div>
         </div>
       </div>
-
 
       {/* BLOCK NEWS SECTION (Africa) */}
       <div className="bg-gray-50 py-6">
@@ -405,24 +408,26 @@ function News() {
                     className="w-full sm:w-1/3 lg:w-1/4 px-3 py-4 border-b-2 border-dotted border-gray-100"
                   >
                     <div className="hover-img">
-                      <a href="#">
+                      <Link to="/NewsInner">
                         <img
                           className="w-full object-cover"
                           src={dummyImage}
                           alt={`News ${idx + 1}`}
                         />
-                      </a>
+                      </Link>
                       <div className="pt-3 pl-3">
                         <h3 className="text-lg font-bold leading-tight mb-2">
-                          <a href="#">5 Tips to Save Money Booking Your Next Hotel Room</a>
+                          <Link to="/NewsInner">
+                            5 Tips to Save Money Booking Your Next Hotel Room
+                          </Link>
                         </h3>
                         <p className="hidden md:block text-gray-600 leading-tight mb-1">
                           This is a wider card with supporting text below as a natural lead-in to additional content.
                         </p>
-                        <a className="text-gray-500" href="#">
+                        <Link className="text-gray-500" to="/NewsInner">
                           <span className="inline-block h-3 border-l-2 border-red-600 mr-2"></span>
                           Europe
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -446,9 +451,9 @@ function News() {
                       "ZF plans $14 billion autonomous vehicle push, concept van",
                     ].map((item, idx) => (
                       <li key={idx} className="border-b border-gray-100 hover:bg-gray-50">
-                        <a className="text-lg font-bold px-6 py-3 flex items-center" href="#">
+                        <Link className="text-lg font-bold px-6 py-3 flex items-center" to="/NewsInner">
                           {item}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

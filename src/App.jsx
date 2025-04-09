@@ -17,6 +17,7 @@ import EpisodesInnerPage from "./Pages/Episodes/EpisodesInner/EpisodesInnerPage"
 import SingleEpisode from "./Pages/Episodes/EpisodesInner/SingleEpisode";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import NewsInner from "./Pages/News/NewsInner";
 
 /* Sticky Sponsor Ad Component (always at bottom) */
 function StickySponsorAd({ onClose }) {
@@ -133,6 +134,7 @@ function App() {
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/episodes" element={<EpisodesInnerPage />} />
           <Route path="/singleEpisode" element={<SingleEpisode />} />
+          <Route path="/NewsInner" element={<NewsInner />} />
           {/* Add additional routes here */}
         </Routes>
       </main>
